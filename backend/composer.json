@@ -1,0 +1,38 @@
+{
+    "name": "hackthenorth17/cockroachnest",
+    "description": "Cockroach DB Cluster Monitoring System",
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "Justin Paulin",
+            "email": "hello@justinpaulin.com"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "config/Config.php",
+            "src/HackTheNorth/CockroachNest/Bootstrap.php"
+        ],
+        "psr-0": {
+            "HackTheNorth\\CockroachNest": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.5.0",
+        "doctrine/migrations": "1.0.0",
+        "ext-curl": "*",
+        "ext-dom": "*",
+        "ext-openssl": "*",
+        "ext-sockets": "*",
+        "ext-xml": "*",
+        "symfony/config": "^2.7",
+        "symfony/console": "^2.7",
+        "symfony/http-foundation": "^2.7",
+        "symfony/http-kernel": "^2.7",
+        "symfony/routing": "^2.7",
+        "doctrine/orm": "^2.5",
+        "twig/twig": "~1.0",
+        "nette/utils": "^2.3",
+        "nategood/httpful": "*"
+    }
+}
