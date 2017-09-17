@@ -1,0 +1,59 @@
+<html>
+<head>
+    <title>Cockroach Nest | Dashboard</title>
+    <link rel="stylesheet" href="leaflet/leaflet.css" />
+    <style>
+        #map {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            z-index: 1;
+        }
+
+        .overlap{
+            position: relative;
+            z-index:2;
+            background: white;
+        }
+    </style>
+    <!-- Bootstrap: Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+
+    <!-- Bootstrap: Optional theme -->
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css" />
+
+    <!-- Bootstrap: Latest compiled and minified JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js""></script>
+</head>
+<body>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Cockroach Nest</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Visualize</a></li>
+            <li><a href="filter.html" id="filter_link" class="toplink">Analyze</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <!-- Map -->
+    <div id="map"></div>
+    <script src="leaflet/leaflet-src.js"></script>
+    <script src="leaflet/leaflet-realtime.min.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>
