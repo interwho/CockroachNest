@@ -1,4 +1,6 @@
+import { Observable } from 'rxjs/Rx';
 import { Component, OnInit } from '@angular/core';
+import { CockroachNode } from '../../../models/CockroachNode';
 
 declare const google: any;
 interface Marker {
@@ -7,6 +9,7 @@ lng: number;
 label?: string;
 draggable?: boolean;
 }
+
 @Component({
   selector: 'app-maps',
   templateUrl: './maps.component.html',
@@ -15,13 +18,13 @@ draggable?: boolean;
 export class MapsComponent implements OnInit {
 
   constructor() { }
-
+  public cockroachNodes: Observable<Array<CockroachNode>> ;
   ngOnInit() {
       const myLatlng = new google.maps.LatLng(40.748817, -73.985428);
       const mapOptions = {
-          zoom: 13,
+          zoom: 2,
           center: myLatlng,
-          scrollwheel: false, // we disable de scroll over the map, it is a really annoing when you scroll through page
+          scrollwheel: true, // we disable de scroll over the map, it is a really annoing when you scroll through page
           styles: [
         {
           "elementType": "geometry",
@@ -308,4 +311,8 @@ export class MapsComponent implements OnInit {
   //Marker.setMap(map);
   }
 
+  
+  pollClusterNodes() { }
+  addClusterNode() {}
+  deleteClusterNode() {}
 }

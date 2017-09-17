@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   constructor(location: Location) {
     this.location = location;
   }
-
+  
   ngOnInit() {
     $.getScript('../../../assets/js/material-dashboard.js');
     $.getScript('../../../assets/js/initMenu.js');
