@@ -316,7 +316,8 @@ export class MapsComponent implements OnInit {
           var marker = new google.maps.Marker({
             position: feature.position,
             icon: icons[feature.type].icon,
-            map: map
+            map: map,
+            optimized: false
           });
           google.maps.event.addListener(marker, 'mouseover', function() {
             infowindow.open(map,marker);
@@ -325,7 +326,7 @@ export class MapsComponent implements OnInit {
             infowindow.close(map,marker);
           });
         });
-
+        
 
   // To add the marker to the map, call setMap();
   //Marker.setMap(map);
