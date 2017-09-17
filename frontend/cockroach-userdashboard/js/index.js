@@ -29,27 +29,43 @@ var realtime = L.realtime({
     crossOrigin: true,
     type: 'json'
     }, {
-    interval: 1 * 1000,
     getFeatureId: function(featureData){
         return featureData.id;
     },
     pointToLayer: function (feature, latlng) {
-        if (feature.properties.Status == "red") {
-            marker = L.marker(latlng, {icon: redIcon});
-        }
-        if (feature.properties.Status == "green") {
-            marker = L.marker(latlng, {icon: greenIcon});
-        }
 
-        var status = feature.properties.Status == 'green' ? 'Active' : 'Down';
+      if (feature.properties.Status == "red") {
+          marker = L.marker(latlng, {icon: redIcon});
+      }
+      if (feature.properties.Status == "green") {
+          marker = L.marker(latlng, {icon: greenIcon});
+      }
 
-        marker.bindPopup('Name: ' + feature.properties.Name +
-                       '<br/> Status: ' + status);
-        marker.addTo(transactionLayer);
-        return marker;
+      var status = feature.properties.Status == 'green' ? 'Active' : 'Down';
+
+      marker.bindPopup('Name: ' + feature.properties.Name +
+                     '<br/> Status: ' + status);
+      marker.addTo(transactionLayer);
+
+      // create a red polygon from an array of LatLng points
+      // var coords1 = [[35.6850, 139.7514], [1.2855, 103.8565]];
+      // var coords12 = [[35.6850, 139.7514], [37.5670, -121.9829]];
+      // var coords2 = [[37.5670, -121.9829], [40.7357, -74.1724]];
+      // var coords23 = [[37.5670, -121.9829], [32.7787, -96.8217]];
+      // var coords3 = [[50.1167, 8.6833], [32.7787, -96.8217]];
+      // var coords4 = [[51.5092, -0.0955], [33.7490, -84.3880]];
+      // var polygon1 = L.polygon(coords1, {color: '#F6BBC2'}).addTo(map);
+      // var polygon12 = L.polygon(coords12, {color: '#FFFFFF'}).addTo(map);
+      // var polygon2 = L.polygon(coords2, {color: '#EF8591'}).addTo(map);
+      // var polygon23 = L.polygon(coords23, {color: '#B2E384'}).addTo(map);
+      // var polygon3 = L.polygon(coords3, {color: '#F6BBC2'}).addTo(map);
+      // var polygon4 = L.polygon(coords4, {color: '#B2E384'}).addTo(map);
+
+      return marker;
     }
 
 }).addTo(map);
+
 
 realtime.on('update', function() {
     map.fitBounds(realtime.getBounds(), {maxZoom: 20});
