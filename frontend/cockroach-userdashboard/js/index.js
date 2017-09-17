@@ -42,21 +42,24 @@ var realtime = L.realtime({
         }
 
         var status = feature.properties.Status == 'green' ? 'Active' : 'Down';
+
+
         var popupContent = '<div> Name: ' + feature.properties.Name +'</div>'+
         '<div> Status: '+status+'</div>'+
         '<label class="switch">'+
-       ' <input type="checkbox" checked>'+
+       ' <input id ="myCheckbox" type="checkbox" checked>'+
         '<span class="slider round">'+
         '</span>'+
         '</label>'
-        
+        if(status != 'Active'){
+            $('#myCheckbox').attr('checked',false);
+        }
+ 
         marker.bindPopup(popupContent, {
             keepInView: true,
             closeButton: false
         }).openPopup();
 
-        var ckb = $(".switch").is(':checked');
-        console.log(ckb);
         marker.addTo(transactionLayer);
         return marker;
     }
