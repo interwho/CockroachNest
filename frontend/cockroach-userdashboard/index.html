@@ -3,6 +3,71 @@
     <title>Cockroach Nest | Dashboard</title>
     <link rel="stylesheet" href="leaflet/leaflet.css" />
     <style>
+    .navigation-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    min-height: 350px;
+    z-index: 2;
+    width: 110px;
+    background-color: #fff;
+    border-right: 1px solid #ededed;
+    margin-left: -35px ;
+    padding: 0;
+    display: block;
+}
+.navigation-bar__list {
+    width: 100%;
+}
+.navigation-bar__list--bottom {
+    position: absolute;
+    bottom: 0;
+}
+.navigation-bar__list {
+    width: 100%;
+}
+ul, menu, dir {
+    display: block;
+    list-style-type: disc;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 40px;
+}
+.navigation-bar__list li {
+    width: 100%;
+    padding: 0;
+    border: 0;
+    font-family: Lato-Heavy;
+    font-size: 8px;
+    text-transform: uppercase;
+    float: left;
+    color: #5f6c87;
+    list-style-type: none;
+    line-height: 18px;
+}
+.navigation-bar__list li a {
+    width: 100%;
+    height: 80px;
+    padding: 20px 0;
+    display: block;
+    color: inherit;
+    text-decoration: none;
+}
+.navigation-bar__list li a div {
+    margin: auto;
+    width: 100%;
+    text-align: center;
+    letter-spacing: 1px;
+}
+.navigation-bar__list li.active {
+    background-color: #fff;
+}
+.navigation-bar__list li.cockroach {
+    padding-top: 10px;
+}
         #map {
             position: absolute;
             top: 0;
@@ -45,13 +110,6 @@
                 border-color:  #cecece;
             }
         }
-        .logo {
-          position: relative;
-          height: 50px;
-          width: 24px;
-          float: left;
-          margin-right: 5px;
-        }
     </style>
     <!-- Bootstrap: Latest compiled and minified CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css" />
@@ -67,14 +125,13 @@
     <!-- Fixed navbar -->
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
-        <div class="navbar-header">
+        <div style="margin-left:30px" class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <img class ="logo" src = "img/cockroachdb.svg" />
           <a class="navbar-brand" href="#">Cockroach Nest</a>
 
         </div>
@@ -84,6 +141,68 @@
             <li><a href="filter.html" id="filter_link" class="toplink">Analyze</a></li>
           </ul>
         </div><!--/.nav-collapse -->
+        <nav class="navigation-bar"><ul class="navigation-bar__list"><li class="normal"><a href="#/cluster"><div class="image-container"><svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+  <!-- Generator: Sketch 3.3.3 (12081) - http://www.bohemiancoding.com/sketch -->
+  <title>Cluster Icon</title>
+  <desc>Created with Sketch.</desc>
+  <defs></defs>
+  <g id="Update-6" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+    <g id="UI-Kit" sketch:type="MSArtboardGroup" transform="translate(-143.000000, -3020.000000)" fill="#959797">
+      <g id="Navigation" sketch:type="MSLayerGroup" transform="translate(112.000000, 2654.000000)">
+        <g id="Main-Navigation" transform="translate(3.000000, 225.000000)" sketch:type="MSShapeGroup">
+          <g id="Rest" transform="translate(0.000000, 90.000000)">
+            <g id="Clusters" transform="translate(16.000000, 51.000000)">
+              <path d="M23.5767273,0 C17.1832727,0 12,5.34525 12,11.9385 C12,18.53175 17.1832727,23.877 23.5767273,23.877 C29.9701818,23.877 35.1534545,18.53175 35.1534545,11.9385 C35.1534545,5.34525 29.9701818,0 23.5767273,0 M20.0254545,11.9385 C20.0254545,10.8495 20.1090909,9.76425 20.2567273,8.6895 C21.3505455,8.84625 22.4538182,8.9535 23.5767273,8.9535 C24.6996364,8.9535 25.8036364,8.84625 26.8974545,8.6895 C27.0450909,9.76425 27.128,10.84875 27.128,11.9385 C27.128,13.0275 27.0450909,14.11275 26.8974545,15.18675 C25.8036364,15.03 24.6996364,14.92275 23.5767273,14.92275 C22.4538182,14.92275 21.3498182,15.03 20.2567273,15.18675 C20.1090909,14.11275 20.0254545,13.0275 20.0254545,11.9385 M28.3250909,8.451 C29.7701818,8.15025 31.1789091,7.69425 32.5541818,7.11675 C33.2858182,8.56125 33.7061818,10.19925 33.7061818,11.9385 C33.7061818,13.67775 33.2858182,15.31575 32.5541818,16.76025 C31.1789091,16.182 29.7701818,15.726 28.3250909,15.426 C28.4850909,14.2725 28.5752727,13.10775 28.5752727,11.9385 C28.5752727,10.76925 28.4850909,9.6045 28.3250909,8.451 M31.7781818,5.83125 C30.5716364,6.32175 29.3410909,6.71775 28.0778182,6.9825 C27.7338182,5.25 27.2123636,3.5595 26.5192727,1.9455 C28.6596364,2.61675 30.4945455,4.00425 31.7781818,5.83125 M24.7432727,1.5675 C25.6130909,3.35625 26.2530909,5.259 26.6487273,7.22175 C25.6363636,7.36425 24.6152727,7.46175 23.5767273,7.46175 C22.5381818,7.46175 21.5170909,7.36425 20.5054545,7.22175 C20.9003636,5.25975 21.5410909,3.35625 22.4109091,1.5675 C22.7941818,1.52175 23.1818182,1.4925 23.5767273,1.4925 C23.9716364,1.4925 24.36,1.52175 24.7432727,1.5675 M20.6349091,1.9455 C19.9418182,3.5595 19.4203636,5.25 19.0763636,6.9825 C17.8130909,6.717 16.5818182,6.32175 15.376,5.83125 C16.6596364,4.0035 18.4945455,2.61675 20.6349091,1.9455 M14.6,7.11675 C15.9752727,7.69425 17.3832727,8.15025 18.8290909,8.451 C18.6690909,9.6045 18.5789091,10.76925 18.5789091,11.9385 C18.5789091,13.10775 18.6690909,14.2725 18.8283636,15.42525 C17.3832727,15.726 15.9752727,16.182 14.6,16.76025 C13.8676364,15.31575 13.448,13.67775 13.448,11.9385 C13.448,10.1985 13.8676364,8.5605 14.6,7.11675 M15.376,18.04575 C16.5818182,17.556 17.8130909,17.16 19.0756364,16.8945 C19.4196364,18.62775 19.9425455,20.31825 20.6370909,21.93225 C18.496,21.261 16.6603636,19.8735 15.376,18.04575 M22.4138182,22.31025 C21.5425455,20.5215 20.9010909,18.618 20.5054545,16.65525 C21.5170909,16.51275 22.5381818,16.41525 23.5767273,16.41525 C24.6152727,16.41525 25.6363636,16.51275 26.648,16.65525 C26.2530909,18.618 25.6116364,20.52075 24.7418182,22.3095 C24.3585455,22.35525 23.9709091,22.3845 23.5767273,22.3845 C23.1832727,22.3845 22.7956364,22.35525 22.4138182,22.31025 M26.5170909,21.93225 C27.2109091,20.31825 27.7330909,18.62775 28.0778182,16.8945 C29.3403636,17.16 30.5716364,17.556 31.7774545,18.04575 C30.4938182,19.8735 28.6581818,21.261 26.5170909,21.93225" id="Cluster-Icon"></path>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg></div><div>Cluster</div></a></li><li class="normal"><a href="#/databases"><div class="image-container"><svg width="24px" height="24px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+  <!-- Generator: Sketch 3.3.3 (12081) - http://www.bohemiancoding.com/sketch -->
+  <title>Database Icon</title>
+  <desc>Created with Sketch.</desc>
+  <defs></defs>
+  <g id="Update-6" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+    <g id="UI-Kit" sketch:type="MSArtboardGroup" transform="translate(-144.000000, -3260.000000)" fill="#959797">
+      <g id="Navigation" sketch:type="MSLayerGroup" transform="translate(112.000000, 2654.000000)">
+        <g id="Main-Navigation" transform="translate(3.000000, 225.000000)" sketch:type="MSShapeGroup">
+          <g id="Rest" transform="translate(0.000000, 90.000000)">
+            <g id="Databases" transform="translate(8.000000, 291.000000)">
+              <path d="M31.6666667,0 C26.5293333,0 21,1.042 21,3.326 L21,18.2466667 C21,20.5306667 26.5293333,21.5726667 31.6666667,21.5726667 C36.8033333,21.5726667 42.3326667,20.5306667 42.3326667,18.2466667 L42.3326667,3.326 C42.3326667,1.042 36.8033333,0 31.6666667,0 L31.6666667,0 Z M40.942,18.2466667 C40.942,18.3586667 40.514,18.9253333 38.5373333,19.4473333 C36.7106667,19.9313333 34.2706667,20.1966667 31.6666667,20.1966667 C29.062,20.1966667 26.6213333,19.9313333 24.7953333,19.4473333 C22.8186667,18.9253333 22.3906667,18.3586667 22.3906667,18.2466667 L22.3906667,15.0293333 C24.3566667,16.0986667 28.1046667,16.5993333 31.6666667,16.5993333 C35.228,16.5993333 38.976,16.0986667 40.942,15.0293333 L40.942,18.2466667 L40.942,18.2466667 Z M40.942,13.2733333 C40.942,13.3853333 40.514,13.9506667 38.5373333,14.474 C36.7106667,14.9566667 34.2706667,15.2226667 31.6666667,15.2226667 C29.062,15.2226667 26.6213333,14.9566667 24.7953333,14.474 C22.8186667,13.9506667 22.3906667,13.3853333 22.3906667,13.2733333 L22.3906667,10.056 C24.3566667,11.1253333 28.1046667,11.6253333 31.6666667,11.6253333 C35.228,11.6253333 38.976,11.1253333 40.942,10.056 L40.942,13.2733333 L40.942,13.2733333 Z M40.942,8.29933333 C40.942,8.41133333 40.514,8.97733333 38.5373333,9.49933333 C36.7106667,9.98266667 34.2706667,10.248 31.6666667,10.248 C29.062,10.248 26.6213333,9.98266667 24.7953333,9.49933333 C22.8186667,8.97733333 22.3906667,8.41133333 22.3906667,8.29933333 L22.3906667,5.082 C24.3566667,6.15133333 28.1046667,6.652 31.6666667,6.652 C35.228,6.652 38.976,6.15133333 40.942,5.082 L40.942,8.29933333 L40.942,8.29933333 Z M38.5373333,4.52533333 C36.7106667,5.00933333 34.2706667,5.27466667 31.6666667,5.27466667 C29.062,5.27466667 26.6213333,5.00933333 24.7953333,4.52533333 C22.8186667,4.00333333 22.3906667,3.438 22.3906667,3.326 C22.3906667,3.214 22.8186667,2.64866667 24.7953333,2.12533333 C26.6213333,1.642 29.062,1.37666667 31.6666667,1.37666667 C34.2706667,1.37666667 36.7106667,1.642 38.5373333,2.12533333 C40.514,2.64866667 40.942,3.214 40.942,3.326 C40.942,3.438 40.514,4.00333333 38.5373333,4.52533333 L38.5373333,4.52533333 Z" id="Database-Icon"></path>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg></div><div>Databases</div></a></li><li class="normal"><a href="#/jobs"><div class="image-container"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 24" xml:space="preserve" width="24" height="24">
+  <g class="nc-icon-wrapper" fill="#959797">
+    <polyline data-color="color-2" fill="none" stroke="#959797" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" points=" 8,5 8,1 16,1 16,5 " stroke-linejoin="miter"></polyline>
+    <polyline fill="none" stroke="#959797" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" points="9,15 1,15 1,5 23,5 23,15 15,15 " stroke-linejoin="miter"></polyline>
+    <polyline fill="none" stroke="#959797" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" points="22,18 22,23 2,23 2,18 " stroke-linejoin="miter"></polyline>
+    <rect data-color="color-2" x="9" y="13" fill="none" stroke="#959797" stroke-width="2" stroke-linecap="square" stroke-miterlimit="10" width="6" height="4" stroke-linejoin="miter"></rect>
+  </g>
+</svg></div><div>Jobs</div></a></li></ul><ul class="navigation-bar__list navigation-bar__list--bottom"><li class="cockroach active"><a href="#/"><div class="image-container"><svg width="38px" height="38px" viewBox="0 0 38 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+  <!-- Generator: Sketch 3.3.3 (12081) - http://www.bohemiancoding.com/sketch -->
+  <title>CL Mark</title>
+  <desc>Created with Sketch.</desc>
+  <g id="Update-6" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+    <g id="Line-Chart-(v4)" sketch:type="MSArtboardGroup" transform="translate(-20.000000, -29.000000)">
+      <g id="Header" sketch:type="MSLayerGroup" transform="translate(-15.000000, -47.000000)">
+        <g id="CL-Mark" transform="translate(35.000000, 76.000000)">
+          <g id="Group-3">
+            <g id="Clip-2"></g>
+            <path d="M23.0622,10.88928 C21.72574,11.2024 20.3281,11.36466 18.89664,11.36466 C17.46518,11.36466 16.06754,11.2024 14.72538,10.88928 C15.84372,9.11696 17.25846,7.53996 18.89664,6.24302 C20.5352,7.54566 21.94386,9.11696 23.0622,10.88928 L23.0622,10.88928 Z M35.66034,0.68134 C33.97998,0.23294 32.2088,0 30.3867,0 C26.14058,0 22.18972,1.27718 18.89132,3.47396 C15.599,1.27718 11.64814,0 7.39632,0 C5.57384,0 3.80266,0.23294 2.1223,0.68134 C1.41322,0.86108 0.72504,1.08832 0.05244,1.34292 C0.00874,1.35926 -0.01216,1.41094 0.00722,1.4535 C0.30134,2.0919 0.62928,2.71054 0.98192,3.30942 C1.0013,3.34248 1.04158,3.35692 1.07768,3.344 C1.77878,3.09244 2.49622,2.87888 3.22962,2.70788 C4.56912,2.39552 5.96562,2.23668 7.39632,2.23668 C10.90448,2.23668 14.1854,3.2186 16.9898,4.91036 C15.21292,6.41478 13.69178,8.21408 12.50504,10.2296 C12.27248,10.6153 12.06234,11.00708 11.8579,11.40456 C11.72186,11.67132 11.59114,11.94378 11.4608,12.22764 C11.27346,12.65324 11.09182,13.07922 10.9326,13.51622 C10.09242,15.77 9.63262,18.21074 9.63262,20.74838 C9.63262,26.62356 12.09084,31.9371 16.0303,35.71772 C16.33696,36.01868 16.65502,36.30254 16.9898,36.5807 C17.25086,36.80756 17.51192,37.0177 17.78438,37.22214 C18.12752,37.4946 18.48662,37.74578 18.8461,37.98632 C18.87346,38.00494 18.90956,38.00456 18.93692,37.98594 C19.29602,37.74008 19.64942,37.4889 19.99256,37.22214 C20.27072,37.0177 20.53216,36.80756 20.79322,36.5807 C21.1223,36.30254 21.45176,36.01298 21.75804,35.71772 C25.69218,31.9371 28.15002,26.61786 28.15002,20.74838 C28.15002,18.21074 27.69022,15.7757 26.85004,13.52192 C26.6855,13.08492 26.50956,12.65324 26.31652,12.22764 C26.19188,11.94378 26.06116,11.67132 25.93044,11.40456 C25.72068,11.00708 25.51054,10.6153 25.2776,10.2296 C24.08554,8.21408 22.5701,6.41478 20.79322,4.91036 C23.59762,3.2186 26.87854,2.23668 30.3867,2.23668 C31.8174,2.23668 33.2139,2.39552 34.5534,2.70788 C35.28642,2.87888 36.00918,3.09244 36.70534,3.34362 C36.74144,3.35692 36.78172,3.34248 36.8011,3.30942 C37.15336,2.71054 37.47636,2.0919 37.77466,1.45388 C37.7948,1.41094 37.7739,1.35926 37.72944,1.34254 C37.05228,1.08832 36.3641,0.86108 35.66034,0.68134 L35.66034,0.68134 Z" id="Fill-1" fill="#151F34" sketch:type="MSShapeGroup"></path>
+          </g>
+          <path d="M25.91372,20.7499 C25.91372,25.65912 23.99396,30.12526 20.86086,33.4419 C20.31024,31.68174 20.0108,29.81404 20.0108,27.88212 C20.0108,22.97328 21.93056,18.49916 25.06366,15.1905 C25.61428,16.94648 25.91372,18.81418 25.91372,20.7499" id="Fill-4" fill="#348540" sketch:type="MSShapeGroup"></path>
+          <path d="M17.77184,27.88212 C17.77184,29.81404 17.4762,31.68174 16.9214,33.4419 C13.7883,30.12526 11.86854,25.65912 11.86854,20.7499 C11.86854,18.81418 12.17216,16.94648 12.72696,15.1905 C15.86006,18.49916 17.77184,22.97328 17.77184,27.88212" id="Fill-5" fill="#7DBC42" sketch:type="MSShapeGroup"></path>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg></div><div></div></a></li></ul></nav>
       </div>
     </nav>
 
