@@ -17,6 +17,34 @@
             z-index:2;
             background: white;
         }
+
+        .ping{
+            width: 25px;
+            height: 25px;
+            border-radius: 50px;
+            position: absolute;
+            box-sizing: border-box;
+            border-style: solid;
+            border-size: 1px;
+            border-color: white;
+        	}
+
+        .ping2 {
+        	    -webkit-animation:   ping 1.75s infinite 1s;
+          	  -moz-animation:      ping 1.75s infinite 1s;
+        }
+
+        @-webkit-keyframes ping{
+        	  		  0%{
+        				        opacity: 0.8;
+          				      border-color:  #cecece;
+            			}
+
+            100%{
+                opacity: 0.3;
+                border-color:  #cecece;
+            }
+        }
     </style>
     <!-- Bootstrap: Latest compiled and minified CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css" />

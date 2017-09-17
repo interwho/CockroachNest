@@ -1,3 +1,4 @@
+
 var maxBounds =  L.latLngBounds(
   L.latLng(5.499550, -167.276413),
   L.latLng(83.162102, -52.233040)
@@ -14,11 +15,13 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 var transactionLayer = L.layerGroup();
 var greenIcon = L.icon({
     iconUrl: 'img/Aqua-Ball-Green-icon.png',
-    iconSize: [20, 20]
+    iconSize: [20, 20],
+    className: 'ping ping2'
 });
 var redIcon = L.icon({
     iconUrl: 'img/Aqua-Ball-Red-icon.png',
-    iconSize: [20, 20]
+    iconSize: [20, 20],
+    className: 'ping ping2'
 });
 
 var realtime = L.realtime({
