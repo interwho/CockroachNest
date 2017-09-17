@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Rx';
 import { Component, OnInit } from '@angular/core';
-import { CockroachNode } from '../../../models/CockroachNode';
+import { CockroachnodeService } from '../../../services/cockroachnode.service';
 
 declare const google: any;
 interface Marker {
@@ -17,13 +17,17 @@ draggable?: boolean;
 })
 export class MapsComponent implements OnInit {
 
-  constructor() { }
-  public cockroachNodes: Observable<Array<CockroachNode>> ;
+  constructor(private nodeService: CockroachnodeService) { }
+
+  public cockroachNodes = {} ;
+
   ngOnInit() {
-      const myLatlng = new google.maps.LatLng(40.748817, -73.985428);
+      this.getClusterNodes();
+      const myLatlng1 = new google.maps.LatLng(40.748817, -73.985428);
+
       const mapOptions = {
-          zoom: 2,
-          center: myLatlng,
+          zoom: 8,
+          center: myLatlng1,
           scrollwheel: true, // we disable de scroll over the map, it is a really annoing when you scroll through page
           styles: [
         {
@@ -273,46 +277,69 @@ export class MapsComponent implements OnInit {
       ]
       };
       var icons = {
-          ping: {
-            icon: getCircle(5)
+          pingFailure: {
+            icon: getFailureCircle(5)
+          },
+          pingSuccess: {
+            icon: getSuccessCircle(5)
           }
+      };
+      function getFailureCircle(magnitude) {
+        return {
+          path: google.maps.SymbolPath.CIRCLE,
+          fillColor: 'red',
+          fillOpacity: 0.4,
+          scale: Math.pow(2, magnitude) / 2,
+          strokeColor: 'red',
+          strokeWeight: 0.5
         };
-        function getCircle(magnitude) {
-          return {
-            path: google.maps.SymbolPath.CIRCLE,
-            fillColor: 'red',
-            fillOpacity: 0.2,
-            scale: Math.pow(2, magnitude) / 2,
-            strokeColor: 'red',
-            strokeWeight: 0.5
-          };
-        }
+      }
+      function getSuccessCircle(magnitude) {
+        return {
+          path: google.maps.SymbolPath.CIRCLE,
+          fillColor: '#32CD32',
+          fillOpacity: 0.4,
+          scale: Math.pow(2, magnitude) / 2,
+          strokeColor: '#32CD32',
+          strokeWeight: 0.5
+        };
+      }
       const map = new google.maps.Map(document.getElementById('map'), mapOptions);
       var features = [
         {
-          position: myLatlng,
-          type: 'ping'
+          position: myLatlng1,
+          type: 'pingFailure'
+        },
+        {
+          position: {lat: 40.363, lng: -73.044},
+          type: 'pingSuccess'
         },
       ]
-      // const Marker = new google.maps.Marker({
-      //     position: myLatlng,
-      //     title: 'Hello World!',
-      //     type: 'ping'
-      // });
+      var infowindow = new google.maps.InfoWindow({
+        content: 'ID: 1' + '</br>' + 'Status: running'
+      });
       features.forEach(function(feature) {
           var marker = new google.maps.Marker({
             position: feature.position,
             icon: icons[feature.type].icon,
             map: map
           });
+          google.maps.event.addListener(marker, 'mouseover', function() {
+            infowindow.open(map,marker);
+          });
+          google.maps.event.addListener(marker, 'mouseout', function() {
+            infowindow.close(map,marker);
+          });
         });
+
 
   // To add the marker to the map, call setMap();
   //Marker.setMap(map);
   }
-
-  
-  pollClusterNodes() { }
+  getClusterNodes(){
+    this.nodeService.getNodes().subscribe(data => this.cockroachNodes = data);
+    console.log(this.cockroachNodes);
+  }
   addClusterNode() {}
   deleteClusterNode() {}
 }
