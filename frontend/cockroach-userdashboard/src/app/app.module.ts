@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app.routing';
 import { PagesModule } from './pages/pages.module';
 
 import { AppComponent } from './app.component';
+import { CockroachnodeService } from './services/cockroachnode.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     PagesModule,
   ],
-  providers: [],
+  providers: [ CockroachnodeService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

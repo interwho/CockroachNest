@@ -1,4 +1,6 @@
+import { Observable } from 'rxjs/Rx';
 import { Component, OnInit } from '@angular/core';
+import { CockroachnodeService } from '../../../services/cockroachnode.service';
 
 declare const google: any;
 interface Marker {
@@ -7,6 +9,7 @@ lng: number;
 label?: string;
 draggable?: boolean;
 }
+
 @Component({
   selector: 'app-maps',
   templateUrl: './maps.component.html',
@@ -14,9 +17,12 @@ draggable?: boolean;
 })
 export class MapsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private nodeService: CockroachnodeService) { }
+
+  public cockroachNodes = {} ;
 
   ngOnInit() {
+      this.getClusterNodes();
       const myLatlng1 = new google.maps.LatLng(40.748817, -73.985428);
 
       const mapOptions = {
@@ -331,5 +337,10 @@ export class MapsComponent implements OnInit {
   // To add the marker to the map, call setMap();
   //Marker.setMap(map);
   }
-
+  getClusterNodes(){
+    this.nodeService.getNodes().subscribe(data => this.cockroachNodes = data);
+    console.log(this.cockroachNodes);
+  }
+  addClusterNode() {}
+  deleteClusterNode() {}
 }
